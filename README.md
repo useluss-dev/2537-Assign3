@@ -4,14 +4,14 @@ Checklist:
 
 - [x] Pokemon cards are randomized each game.
 
-8/8 marks
+8/8 marks (2 marks each)
 
 - [x] Cards flip when clicked.
 - [x] If the user clicks on the same card twice, do nothing.
 - [x] If the user clicks on a card that is already matched, do nothing.
 - [x] If the user clicks on a card while two cards are already flipped, do nothing.
 
-42/42 marks
+42/42 marks (7 marks each)
 
 - [x] Winning Event is implemented. If user clicks on all the cards, display a winning message.
 - [x] Header is showing the number of clicks the user has made, and the number of pairs left, number of pairs matched, total number of pairs, and game timer.
