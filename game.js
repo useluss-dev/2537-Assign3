@@ -110,6 +110,10 @@ function run(firstCard, secondCard) {
         clearInterval(timerInterval);
         alert(`You won in ${timer} seconds!`);
       }, 1000);
+
+      // Re-enable Start button for new game
+      $("#startBtn").prop("disabled", false);
+      $("#restartBtn").prop("disabled", true);
     }
     return;
   }

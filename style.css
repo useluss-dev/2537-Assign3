@@ -23,6 +23,18 @@ body {
   font-size: 18px;
 }
 
+#controls {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#startBtn,
+#restartBtn {
+  font-size: 16px;
+  padding: 5px 15px;
+  margin: 0 5px;
+}
+
 .card {
   width: 33.3%;
   position: relative;

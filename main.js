@@ -16,8 +16,12 @@ function setDifficulty(difficulty) {
       setCardWidth("20%");
       break;
   }
+
+  matchedPairs = 0;
   clearInterval(timerInterval);
-  buildGameBoard();
+  timer = 0;
+  $("#timer").text("Time: 0s");
+  $("#game_grid").empty();
 }
 
 function setCardWidth(percent) {
@@ -31,5 +35,23 @@ $(document).ready(() => {
     setDifficulty(this.value);
   });
 
-  setDifficulty($("input[name='difficulty']:checked").val());
+  $("#startBtn").on("click", () => {
+    setDifficulty($("input[name='difficulty']:checked").val());
+    buildGameBoard();
+    $("#startBtn").prop("disabled", true);
+    $("#restartBtn").prop("disabled", false);
+    $("#timer").show();
+  });
+
+  $("#restartBtn").on("click", () => {
+    // Reset game state and clear board
+    clearInterval(timerInterval);
+    timer = 0;
+    matchedPairs = 0;
+    $("#game_grid").empty();
+
+    // Allow user to press Start again
+    $("#startBtn").prop("disabled", false);
+    $("#restartBtn").prop("disabled", true);
+  });
 });
