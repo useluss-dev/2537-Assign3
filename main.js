@@ -54,4 +54,25 @@ $(document).ready(() => {
     $("#startBtn").prop("disabled", false);
     $("#restartBtn").prop("disabled", true);
   });
+
+  // Initialize theme from localStorage
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    $("#darkModeBtn").text("Light Mode");
+  }
+
+  // Dark mode toggle handler
+  $("#darkModeBtn").on("click", function () {
+    const isDark = $("html").attr("data-theme") === "dark";
+    if (isDark) {
+      $("html").removeAttr("data-theme");
+      localStorage.setItem("theme", "light");
+      $(this).text("Dark Mode");
+    } else {
+      $("html").attr("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+      $(this).text("Light Mode");
+    }
+  });
 });
