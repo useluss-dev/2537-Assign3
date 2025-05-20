@@ -1,8 +1,40 @@
 const TOTAL_POKEMON = 1025;
+const MAX_TIME = 60; // seconds
+
+let numPairs = 3;
+let matchedPairs = 0;
+let timer = 0;
+let timerInterval;
+
+function setDifficulty(difficulty) {
+  switch (difficulty) {
+    case "easy":
+      numPairs = 3;
+      $("#game_grid").css({ width: "600px", height: "400px" });
+      setCardWidth("33.3%");
+      break;
+    case "medium":
+      numPairs = 6;
+      $("#game_grid").css({ width: "800px", height: "600px" });
+      setCardWidth("25%");
+      break;
+    case "hard":
+      numPairs = 10;
+      $("#game_grid").css({ width: "1000px", height: "800px" });
+      setCardWidth("20%");
+      break;
+  }
+  clearInterval(timerInterval);
+  buildGameBoard();
+}
+
+function setCardWidth(percent) {
+  const style = document.createElement("style");
+  style.innerHTML = `.card { width: ${percent} !important; }`;
+  document.head.appendChild(style);
+}
 
 async function fetchRandomPokemon() {
-  const numPairs = 3;
-
   const ids = new Set();
   while (ids.size < numPairs) {
     ids.add(Math.floor(Math.random() * TOTAL_POKEMON) + 1);
@@ -45,6 +77,22 @@ async function buildGameBoard() {
   setup();
 }
 
+function startTimer() {
+  timer = 0;
+  $("#timer").text(`Time: ${timer}s`);
+
+  timerInterval = setInterval(() => {
+    timer++;
+    $("#timer").text(`Time: ${timer}s`);
+
+    if (timer >= MAX_TIME) {
+      clearInterval(timerInterval);
+      alert("Time's up! Restarting the game.");
+      location.reload(); // reload the page to restart
+    }
+  }, 1000);
+}
+
 function setup() {
   let firstCard = undefined;
   let secondCard = undefined;
@@ -75,13 +123,22 @@ function setup() {
       }, 1000);
     }
   });
+
+  startTimer();
 }
 
 function run(firstCard, secondCard) {
   if (cardsMatch(firstCard, secondCard)) {
-    console.log("match");
     firstCard.off("click");
     secondCard.off("click");
+
+    matchedPairs++;
+    if (matchedPairs === numPairs) {
+      setTimeout(() => {
+        clearInterval(timerInterval);
+        alert(`You won in ${timer} seconds!`);
+      }, 1000);
+    }
     return;
   }
   console.log("no match");
@@ -107,4 +164,10 @@ function cardsMatch(firstCard, secondCard) {
   );
 }
 
-$(document).ready(buildGameBoard);
+$(document).ready(() => {
+  $("input[name='difficulty']").on("change", function () {
+    setDifficulty(this.value);
+  });
+
+  setDifficulty($("input[name='difficulty']:checked").val());
+});

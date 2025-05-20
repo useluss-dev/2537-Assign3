@@ -3,12 +3,24 @@ body {
 }
 
 #game_grid {
-  border: 2px tomato solid;
+  border: 2px black solid;
   width: 600px;
   height: 400px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+}
+
+#timer {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+#difficulty {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
 }
 
 .card {
@@ -17,6 +29,7 @@ body {
   transition: transform 1s;
   perspective: 1000px;
   transform-style: preserve-3d;
+  flex: 0 0 auto;
 }
 
 img {
