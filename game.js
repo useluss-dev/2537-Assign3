@@ -58,9 +58,7 @@ function startTimer() {
     $("#timer").text(`Time: ${timer}s`);
 
     if (timer >= MAX_TIME) {
-      clearInterval(timerInterval);
-      alert("Time's up! Restarting the game.");
-      location.reload(); // reload the page to restart
+      onLoss();
     }
   }, 1000);
 }
@@ -106,14 +104,7 @@ function run(firstCard, secondCard) {
 
     matchedPairs++;
     if (matchedPairs === numPairs) {
-      setTimeout(() => {
-        clearInterval(timerInterval);
-        alert(`You won in ${timer} seconds!`);
-      }, 1000);
-
-      // Re-enable Start button for new game
-      $("#startBtn").prop("disabled", false);
-      $("#restartBtn").prop("disabled", true);
+      onWin();
     }
     return;
   }
@@ -123,6 +114,23 @@ function run(firstCard, secondCard) {
     flip(firstCard);
     flip(secondCard);
   }, 1000);
+}
+
+function onWin() {
+  setTimeout(() => {
+    clearInterval(timerInterval);
+    alert(`You won in ${timer} seconds!`);
+  }, 1000);
+
+  // Re-enable Start button for new game
+  $("#startBtn").prop("disabled", false);
+  $("#restartBtn").prop("disabled", true);
+}
+
+function onLoss() {
+  clearInterval(timerInterval);
+  alert("Time's up! Restarting the game.");
+  location.reload(); // reload the page to restart
 }
 
 function isFlipped(card) {
