@@ -22,7 +22,7 @@ Checklist:
 
 0/10 marks
 
-- [] The website has an appealing, professional and consistent look.
+- [ ] The website has an appealing, professional and consistent look.
 
 Total Grade:
 60/70 (Total grade out of 70, first item is 10 marks, 2 marks each for next 4 items, 7 marks each for next 6 items and 10 marks for last item)
