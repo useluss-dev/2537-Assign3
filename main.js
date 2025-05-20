@@ -17,6 +17,12 @@ function setDifficulty(difficulty) {
       break;
   }
 
+  // Set stats
+  $("#clicks").text("0");
+  $("#pairsLeft").text(numPairs);
+  $("#pairsMatched").text("0");
+  $("#totalPairs").text(numPairs);
+
   matchedPairs = 0;
   clearInterval(timerInterval);
   timer = 0;
@@ -40,6 +46,7 @@ $(document).ready(() => {
     buildGameBoard();
     $("#startBtn").prop("disabled", true);
     $("#restartBtn").prop("disabled", false);
+    $("#powerUpBtn").prop("disabled", false);
     $("#timer").show();
   });
 
@@ -53,6 +60,13 @@ $(document).ready(() => {
     // Allow user to press Start again
     $("#startBtn").prop("disabled", false);
     $("#restartBtn").prop("disabled", true);
+    $("#powerUpBtn").prop("disabled", true);
+
+    // Add reset for stats
+    clickCount = 0;
+    $("#clicks").text("0");
+    $("#pairsMatched").text("0");
+    $("#pairsLeft").text(numPairs);
   });
 
   // Initialize theme from localStorage
@@ -75,4 +89,6 @@ $(document).ready(() => {
       $(this).text("Light Mode");
     }
   });
+
+  $("#powerUpBtn").on("click", activatePowerUp);
 });

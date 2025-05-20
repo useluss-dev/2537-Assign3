@@ -5,6 +5,7 @@ let numPairs = 3;
 let matchedPairs = 0;
 let timer = 0;
 let timerInterval;
+let clickCount = 0;
 
 async function fetchRandomPokemon() {
   const ids = new Set();
@@ -77,6 +78,9 @@ function setup() {
     // Flip the clicked card
     flip(card);
 
+    clickCount++;
+    $("#clicks").text(clickCount);
+
     if (!firstCard) {
       firstCard = card;
     } else {
@@ -103,6 +107,10 @@ function run(firstCard, secondCard) {
     secondCard.off("click");
 
     matchedPairs++;
+
+    $("#pairsMatched").text(matchedPairs);
+    $("#pairsLeft").text(numPairs - matchedPairs);
+
     if (matchedPairs === numPairs) {
       onWin();
     }
@@ -146,4 +154,15 @@ function cardsMatch(firstCard, secondCard) {
     firstCard.data("id") === secondCard.data("id") &&
     firstCard[0] !== secondCard[0]
   );
+}
+
+function activatePowerUp() {
+  const unflipped = $(".card").not(".flip");
+
+  // Briefly show all cards
+  unflipped.addClass("flip");
+
+  setTimeout(() => {
+    unflipped.removeClass("flip");
+  }, 1000);
 }

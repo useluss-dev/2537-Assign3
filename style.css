@@ -44,10 +44,20 @@ body {
 
 #startBtn,
 #restartBtn,
-#darkModeBtn {
+#darkModeBtn,
+#powerUpBtn {
   font-size: 16px;
   padding: 5px 15px;
   margin: 0 5px;
+}
+
+#stats {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
 }
 
 .card {
